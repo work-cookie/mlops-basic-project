@@ -27,3 +27,23 @@ aws configure --profile localstack
 ![alt text](image.png)
 
 aws s3 ls --endpoint-url=http://localhost:4566 --profile localstack 
+
+## Terraform
+
+### install terraform
+ brew tap hashicorp/tap
+ brew install hashicorp/tap/terraform
+
+ ## DVC - data for git
+ dvc init -> creates .dvc(config file, .gitignore files) folder, .dvcignore file
+
+add remote 
+ dvc remote add -d s3remote s3://ch-mlops-project/dvc/ 
+
+# Use AWS profile
+dvc remote modify s3remote profile aws-mlops
+
+# Enable faster uploads
+dvc remote modify s3remote multipart_chunksize 50MB
+dvc remote modify s3remote max_jobs 10
+
