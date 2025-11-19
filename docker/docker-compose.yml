@@ -1,0 +1,15 @@
+services:
+  localstack:
+    container_name: localstack
+    image: localstack/localstack:latest
+    ports:
+      - "4566:4566"     # LocalStack Gateway
+      - "4571:4571"
+    environment:
+      - SERVICES=s3,sqs,lambda,iam,sts,ecr,ecs,cloudwatch,secretsmanager
+      - DEBUG=1
+      - DATA_DIR=/var/lib/localstack/data
+      - LS_LOG=trace
+    volumes:
+      - "./localstack-data:/var/lib/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock" # Needed if you run Lambdas/Docker inside LocalStack.
